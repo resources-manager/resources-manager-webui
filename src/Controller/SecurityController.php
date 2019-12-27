@@ -43,10 +43,10 @@ class SecurityController extends AbstractController
     private function getRegisterForm()
     {
         return $this->createFormBuilder()
-        ->add('email', EmailType::class)
+        ->add('email', EmailType::class,[])
         ->add('password', PasswordType::class, [])
         ->add('display_name', TextType::class,[])
-        ->add('save', SubmitType::class)
+        ->add('save', SubmitType::class,[])
         ->getForm();
 
     }
