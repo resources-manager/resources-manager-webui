@@ -1,16 +1,16 @@
 index:
     path: /
     controller: App\Controller\HomeController::index
-
 login:
     path:       /login
     controller: App\Controller\SecurityController::login
     methods: GET|POST
 
-register:
+registerForm:
     path: /register
-    controller: App\Controller\SecurityController::show_register_form
-    methods: GET|POST
+    controller: App\Controller\SecurityController::showRegisterForm
+    methods: GET
+
 register:
     path: /register
     controller: App\Controller\SecurityController::register
