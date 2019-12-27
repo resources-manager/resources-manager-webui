@@ -1,0 +1,48 @@
+
+body{
+    top: 0px;
+    word-wrap:break-word;
+    text-rendering:optimizelegibility;
+    margin:0 auto;font-family : "lucida grande", "gill sans", arial, sans-serif;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 1em;
+
+
+    display: grid;
+    grid-template-areas: "header header"
+                         "contentFull contentFull"
+                         "nav content"
+                         "footer footer";
+    grid-template-columns: 20em auto;
+}
+
+body header {
+    grid-area: header;
+    text-align: center;
+}
+body nav {
+    grid-area: nav;
+}
+section#main {
+    grid-area: content;
+}
+section.overnav{
+    grid-area: contentFull;
+    justify-self: center;
+    
+}
+body footer {
+    grid-area: footer;
+}
+
+form{
+    display: grid;
+    grid-template-columns: 15em 30em;
+}
+form label {
+    grid-column: 1 / 2;
+}
+form input, form button {
+    grid-column: 2 / 3;
+}
