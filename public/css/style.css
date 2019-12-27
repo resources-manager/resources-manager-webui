@@ -11,9 +11,10 @@ body{
 
     display: grid;
     grid-template-areas: "header header"
+                         "contentFull contentFull"
                          "nav content"
                          "footer footer";
-    grid-template-columns: 20% auto;
+    grid-template-columns: 20em auto;
 }
 
 body header {
@@ -26,13 +27,18 @@ body nav {
 section#main {
     grid-area: content;
 }
+section.overnav{
+    grid-area: contentFull;
+    justify-self: center;
+    
+}
 body footer {
     grid-area: footer;
 }
 
 form{
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 15em 30em;
 }
 form label {
     grid-column: 1 / 2;

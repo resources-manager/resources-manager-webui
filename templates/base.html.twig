@@ -11,9 +11,11 @@
     <body>
         <header>{% block header %}<h1>Resources booking manager</h1>{% endblock %}</header>
         <nav></nav>
+        {% block overcontent %}
         <section id="main">
         {% block content %}{% endblock %}
         </section>
+        {% endblock %}
         <footer></footer>
         {% block javascripts %}{% endblock %}
     </body>
