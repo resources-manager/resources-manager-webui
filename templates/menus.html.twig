@@ -1,0 +1,7 @@
+<ul>
+{% for m in menus %}
+<li>
+    <a href="{{ path(m.route) }}">{{ m.title }}</a>
+</li>
+{% endfor %}
+</ul>

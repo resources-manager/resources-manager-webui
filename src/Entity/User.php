@@ -70,6 +70,11 @@ class User implements UserInterface
         return (string) $this->email;
     }
 
+    public function isGranted($role): bool
+    {
+        return in_array($role, $this->getRoles());
+    }
+
     /**
      * @see UserInterface
      */

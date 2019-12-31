@@ -68,7 +68,6 @@ class SecurityController extends AbstractController
     {
         $form =  $this->getRegisterForm();
         $form->handleRequest($request);
-        echo "hey";
         if ($form->isSubmitted() && $form->isValid())
         {
             $data = $form->getData();
@@ -92,6 +91,11 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('index',[]);
         }
 
+    }
+
+    public function showUserManagePage()
+    {
+        
     }
 
 }

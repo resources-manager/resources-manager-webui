@@ -10,10 +10,10 @@
     </head>
     <body>
         <header>{% block header %}<h1>Resources booking manager</h1>{% endblock %}</header>
-        <nav></nav>
+        <nav>{% block nav %}{% endblock %}</nav>
         {% block overcontent %}
         <section id="main">
-        {% block content %}{% endblock %}
+        {% block content %}{% include 'menu.html.twig' %}{% endblock %}
         </section>
         {% endblock %}
         <footer></footer>

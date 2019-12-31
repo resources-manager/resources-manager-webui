@@ -14,8 +14,11 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
         main:
             anonymous: ~
+            pattern: ^/
+            user_checker: App\Security\UserChecker
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthentificatorAuthenticator
