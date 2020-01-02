@@ -112,16 +112,43 @@ class SecurityController extends AbstractController
         ->add('save', SubmitType::class,[])
         ->getForm();
     }
-    public function showUserManagePage()
+    
+    public function showUserManagePage(Request $request,  UserPasswordEncoderInterface $passwordEncoder)
     {
+
+
+        $formCreateUser = $this->getformCreateUser();
+        $formCreateUser->handleRequest($request);
+
+        if ($formCreateUser->isSubmitted() && $formCreateUser->isValid()) {
+            $userValues = $formCreateUser->getData();
+            
+            $user = new User();
+            $user   ->setEmail($userValues ["email"])
+                    ->setPassword( $passwordEncoder->encodePassword($user,$userValues ["password"])   )
+                    ->setDisplayName( $userValues ["display_name"] )
+                    ->setActive(true)
+                    ->setRoles(array( $userValues["roles"] ));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            //empty the form
+            $formCreateUser = $this->getformCreateUser();
+
+        }
+
         $users = $this->getDoctrine()
             ->getRepository(User::class)
             ->findAll();
         $menus = new Menus();
+
+
         return $this->render('security/listUsers.html.twig', [
             "menus" => $menus->getMenus( $this->getUser() ),
             "users" => $users,
-            "formCreateUser"  => $this->getformCreateUser()->createView()
+            "formCreateUser"  => $formCreateUser->createView()
         ]);
     }
 

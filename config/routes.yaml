@@ -21,4 +21,4 @@ register:
 users:
     path: /users
     controller: App\Controller\SecurityController::showUserManagePage
-    methods: GET
+    methods: GET|POST
