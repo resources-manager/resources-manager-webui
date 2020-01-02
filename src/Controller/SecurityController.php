@@ -8,11 +8,14 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
+use App\Service\Menus;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 class SecurityController extends AbstractController
@@ -92,10 +95,34 @@ class SecurityController extends AbstractController
         }
 
     }
-
+    private function getformCreateUser()
+    {
+        return $this->createFormBuilder()
+        ->add('email', EmailType::class,[])
+        ->add('password', PasswordType::class, [])
+        ->add('display_name', TextType::class,[])
+        ->add('roles', ChoiceType::class, [
+            'choices'  => [
+                'USER' => false,
+                'RESOURCE_MANAGER' => 'RESOURCE_MANAGER',
+                'SUPER ADMIN' => 'SUPER_ADMIN',
+                ],
+            'multiple'  => false
+            ])
+        ->add('save', SubmitType::class,[])
+        ->getForm();
+    }
     public function showUserManagePage()
     {
-        
+        $users = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findAll();
+        $menus = new Menus();
+        return $this->render('security/listUsers.html.twig', [
+            "menus" => $menus->getMenus( $this->getUser() ),
+            "users" => $users,
+            "formCreateUser"  => $this->getformCreateUser()->createView()
+        ]);
     }
 
 }
