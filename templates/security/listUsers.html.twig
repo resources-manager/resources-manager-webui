@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}Manage users{% endblock %}
+{% block header %}<h1>Manage users</h1>{% endblock %}
+{% block nav %}{% include 'menus.html.twig' %}{% endblock %}
+{% block content %}
+
+<article id="FormCreateUser">
+        <h2>Create a new user</h2>
+        {{ form(formCreateUser) }}
+        <p>{{ form_errors(formCreateUser) }}</p>
+</article>
+
+<article>
+    <h2>Users list</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Displayed Name</th>
+                <th>Login (email)</th>
+                <th>Roles</th>
+                <th>Active</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for u in users %}
+            <tr>
+                <td>{{ u.displayName }} </td>
+                <td>{{ u.email }}</td>
+                <td>{{ u.roles|join(',')  }}</td>
+                <td>{{ u.active? 'Yes':'No' }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</article>
+{% endblock %}
